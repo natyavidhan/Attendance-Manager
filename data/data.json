@@ -1,0 +1,26 @@
+{
+    "Class": "Xth",
+    "Teacher": "Govind Jangid",
+    "Students Info": {
+        "Natya": {
+            "Roll No.": "39",
+            "Phone No.": "9718413051"
+        },
+        "Niharika": {
+            "Roll No.": "40",
+            "Phone No.": "9389689072"
+        },
+        "Shubhi": {
+            "Roll No.": "47",
+            "Phone No.": "8051828005"
+        },
+        "Tanishq": {
+            "Roll No.": "52",
+            "Phone No.": "9999602572"
+        },
+        "Rashi": {
+            "Roll No.": "45",
+            "Phone No.": "9868567720"
+        }
+    }
+}
