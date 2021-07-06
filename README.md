@@ -9,4 +9,4 @@ Take Daily Attendance With The Help Of A Very Interactive GUI
 Manage Multiple Classes At A Time 
 
 ## Globally Saved
-All our Classes Are Saved Globally i.e. You Can Access Them From Anywhere In The World
+All The Classes Are Saved Globally i.e. You Can Access Them From Anywhere In The World
