@@ -3,22 +3,33 @@ import PySimpleGUI as sg
 def read():
     with open("data/data.json", "r") as f:
         return json.load(f)
-students = []
 data = read()
-for i in data['Students Info']:
-    students.append(i)
+students = list(data['Students Info'])
 tab1_layout =  [[sg.T('Class Details', font="Acme 40")],
                 [sg.T(f"Class: {data['Class']}", font="Acme 14", key = "class", size=(30, 0))],
                 [sg.T(f"Class Teacher: {data['Teacher']}", font="Acme 14", key = "teacher", size=(30, 0))],
-                [sg.T(f"Total Students: {len(data['Students Info'])}", font="Acme 14")]] 
+                [sg.T(f"Total Students: {len(data['Students Info'])}", font="Acme 14")]]
 edit_layout = [[sg.T("Edit Class Details", font="Acme 40")],
                [sg.T("Class"), sg.Input("", size=((25,1)), key="classname"), sg.Button("Save", size=(10,0), key ="saveclassname")],
                [sg.T("Class Teacher"), sg.Input("", size=((25,1)), key="teachername"), sg.Button("Save", size=(10,0), key ="saveteachername")]]
 
-tab2_layout = [[sg.T('Student Details', font="Acme 40")],
-               [sg.T("Select Student: ", font="Acme 11"), sg.Combo(values = students,readonly=True, size = (20, 1), font="Acme 11", key= "selectstudent"), sg.Button("Search", font="Acme 11", key="searchstudent")],
-               [sg.T(f'Roll No.: ', key="rollno", size = (30, 1))],
-               [sg.T(f'Phone No.: ', key="phoneno", size = (30, 1))]]    
+tab2_layout = [
+    [sg.T('Student Details', font="Acme 40")],
+    [
+        sg.T("Select Student: ", font="Acme 11"),
+        sg.Combo(
+            values=students,
+            readonly=True,
+            size=(20, 1),
+            font="Acme 11",
+            key="selectstudent",
+        ),
+        sg.Button("Search", font="Acme 11", key="searchstudent"),
+    ],
+    [sg.T('Roll No.: ', key="rollno", size=(30, 1))],
+    [sg.T('Phone No.: ', key="phoneno", size=(30, 1))],
+]
+    
 
 add_student = [[sg.T('Add Student', font="Acme 40")],
                [sg.T('Name: ', font="Acme 11"), sg.Input("", font="Acme 11", size=(20, 20), key="nametoadd")],
@@ -36,9 +47,9 @@ layout = [[sg.TabGroup([[sg.Tab('Class Details', tab1_layout), sg.Tab("Edit", ed
 window = sg.Window('Class Manager', layout, default_element_size=(12,1))    
 
 while True:    
-    event, values = window.read()   
+    event, values = window.read()
     if event == sg.WIN_CLOSED:  
-        break 
+        break
     elif event == "saveclassname":
         data = read()
         data["Class"] = values['classname']
@@ -67,10 +78,8 @@ while True:
         data['Students Info'][values['nametoadd']] = {"Roll No.": values['rollnotoadd'], "Phone No.": values['phonenotoadd']}
         with open("data/data.json", "w") as f:
             json.dump(data, f, indent=4)
-        students = []
         data = read()
-        for i in data['Students Info']:
-            students.append(i)
+        students = list(data['Students Info'])
         window['selectstudent'].update(values=students,readonly=True, size = (20, 1), font="Acme 11")
         window['selectstudentfordelete'].update(values=students,readonly=True, size = (20, 1), font="Acme 11")
     elif event == "deletestudent":
@@ -78,9 +87,7 @@ while True:
         data['Students Info'].pop(values['selectstudentfordelete'])
         with open("data/data.json", "w") as f:
             json.dump(data, f, indent=4)
-        students = []
         data = read()
-        for i in data['Students Info']:
-            students.append(i)
+        students = list(data['Students Info'])
         window['selectstudent'].update(values=students,readonly=True, size = (20, 1), font="Acme 11")
         window['selectstudentfordelete'].update(values=students,readonly=True, size = (20, 1), font="Acme 11")

@@ -46,7 +46,10 @@ event, values = window.read()
 
 window.close()
 
-sg.popup('Title',
-            'The results of the window.',
-            'The button clicked was "{}"'.format(event),
-            'The values are', values)
+sg.popup(
+    'Title',
+    'The results of the window.',
+    f'The button clicked was "{event}"',
+    'The values are',
+    values,
+)
